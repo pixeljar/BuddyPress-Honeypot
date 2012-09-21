@@ -3,7 +3,7 @@
 Plugin Name: Pixel Jar BuddyPress Honeypot
 Plugin URI: http://pixeljar.net/buddypress-honeypot
 Description: Simple plugin to add a honeypot to the BuddyPress registration form to prevent spam registrations.
-Version: 1.0
+Version: 1.1
 Author: Pixel Jar
 Author URI: http://pixeljar.net
 */
