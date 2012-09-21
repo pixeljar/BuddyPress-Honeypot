@@ -30,6 +30,9 @@ Author URI: http://pixeljar.net
  * **********************************************************************
  */
 
+// INTERNATIONALIZATION
+load_plugin_textdomain( 'pj-buddypress-honeypot', null, basename( dirname( __FILE__ ) ) );
+
 class pjbp_honeypot {
 
 	/**
