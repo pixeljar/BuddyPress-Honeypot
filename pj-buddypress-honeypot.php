@@ -59,7 +59,7 @@ class pjbp_honeypot {
 	function add_honeypot() {
 		
 		echo '<div style="display: none;">';
-		echo '<input type="text" name="'.apply_filters( 'bppj_honeypot_name', BPPJ_HONEYPOT_NAME ).'" id="'.apply_filters( 'bppj_honeypot_id', BPPJ_HONEYPOT_ID ).'" />';
+		echo '<input type="text" name="'.apply_filters( 'bppj_honeypot_name', self::BPPJ_HONEYPOT_NAME ).'" id="'.apply_filters( 'bppj_honeypot_id', self::BPPJ_HONEYPOT_ID ).'" />';
 		echo '</div>';
 	}
 
@@ -73,7 +73,7 @@ class pjbp_honeypot {
 	function check_honeypot( $result = array() ) {
 		global $bp;
 
-		$bppj_honeypot_name = apply_filters( 'bppj_honeypot_name', BPPJ_HONEYPOT_NAME );
+		$bppj_honeypot_name = apply_filters( 'bppj_honeypot_name', self::BPPJ_HONEYPOT_NAME );
 
 		if( isset( $_POST[$bppj_honeypot_name] ) && !empty( $_POST[$bppj_honeypot_name] ) )
 			$result['errors']->add( 'pjbp_honeypot', apply_filters( 'bppj_honeypot_fail_message', __( "You're totally a spammer. Go somewhere else with your spammy ways." ) ) );
