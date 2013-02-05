@@ -45,6 +45,7 @@ class pjbp_honeypot {
 
 	function __construct() {
 		add_action( 'bp_after_signup_profile_fields', array( &$this, 'add_honeypot' ) );
+		add_filter( 'bp_signup_validate', array( &$this, 'check_honeypot' ) );
 	}
 
 	/**
