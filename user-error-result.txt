@@ -1,0 +1,241 @@
+// Using the $result['errors']->add() method
+// Keeps username and e-mail address errors intact
+// Doesn't prevent registration completion under BP 1.7
+
+// Before bp_core_validate_user_signup filtering, new user
+Array
+(
+    [user_name] => smersh
+    [user_email] => smersh@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// After bp_core_validate_user_signup filtering, new user
+Array
+(
+    [user_name] => smersh
+    [user_email] => smersh@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                    [pjbp_honeypot] => Array
+                        (
+                            [0] => You're totally a spammer. Go somewhere else with your spammy ways.
+                        )
+
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// Before bp_core_validate_user_signup filtering, duplicated user
+Array
+(
+    [user_name] => smersh
+    [user_email] => smersh@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                    [user_name] => Array
+                        (
+                            [0] => Sorry, that username already exists!
+                        )
+
+                    [user_email] => Array
+                        (
+                            [0] => Sorry, that email address is already used!
+                        )
+
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// After bp_core_validate_user_signup filtering, duplicated user
+
+Array
+(
+    [user_name] => smersh
+    [user_email] => smersh@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                    [user_name] => Array
+                        (
+                            [0] => Sorry, that username already exists!
+                        )
+
+                    [user_email] => Array
+                        (
+                            [0] => Sorry, that email address is already used!
+                        )
+
+                    [pjbp_honeypot] => Array
+                        (
+                            [0] => You're totally a spammer. Go somewhere else with your spammy ways.
+                        )
+
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+
+
+
+
+
+// Using the $bp->signup->errors method
+// Breaks display of username and e-mail address errors
+// Prevents registration completion under BP 1.7
+
+// Before bp_core_validate_user_signup filtering, new user
+WP_Error Array
+(
+    [user_name] => leonard
+    [user_email] => leonard@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// Before honeypot action, new user
+$bp->signup->errors
+(nothing written)
+
+// After bp_core_validate_user_signup filtering, new user
+WP_Error Array
+(
+    [user_name] => leonard
+    [user_email] => leonard@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// After honeypot action, new user
+$bp->signup->errors 
+Array
+(
+    [pjbp_honeypot] => Sorry, something went wrong with your registration
+)
+
+// Before bp_core_validate_user_signup filtering, duplicate user
+WP_Error Array
+(
+    [user_name] => leonard
+    [user_email] => leonard@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                    [user_name] => Array
+                        (
+                            [0] => Sorry, that username already exists!
+                        )
+
+                    [user_email] => Array
+                        (
+                            [0] => Sorry, that email address is already used!
+                        )
+
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// Before honeypot, dupe user
+WP_Errors $bp->error Array
+(
+    [signup_username] => Sorry, that username already exists!
+    [signup_email] => Sorry, that email address is already used!
+)
+
+// After bp_core_validate_user_signup filtering, duplicate user
+ WP_Error Array
+(
+    [user_name] => leonard
+    [user_email] => leonard@mail.me
+    [errors] => WP_Error Object
+        (
+            [errors] => Array
+                (
+                    [user_name] => Array
+                        (
+                            [0] => Sorry, that username already exists!
+                        )
+
+                    [user_email] => Array
+                        (
+                            [0] => Sorry, that email address is already used!
+                        )
+
+                )
+
+            [error_data] => Array
+                (
+                )
+
+        )
+
+)
+
+// After honeypot, dupe user
+WP_Errors $bp->error Array
+(
+    [signup_username] => Sorry, that username already exists!
+    [signup_email] => Sorry, that email address is already used!
+    [pjbp_honeypot] => Sorry, something went wrong with your registration
+)

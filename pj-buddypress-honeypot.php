@@ -45,7 +45,7 @@ class pjbp_honeypot {
 
 	function __construct() {
 		add_action( 'bp_after_signup_profile_fields', array( &$this, 'add_honeypot' ) );
-		add_filter( 'bp_core_validate_user_signup', array( &$this, 'check_honeypot' ) );
+		add_filter( 'bp_signup_validate', array( &$this, 'check_honeypot' ) );
 	}
 
 	/**
@@ -70,15 +70,14 @@ class pjbp_honeypot {
 	 * @filter bppj_honeypot_name
 	 * @filter bppj_honeypot_fail_message
 	 */
-	function check_honeypot( $result = array() ) {
+	function check_honeypot() {
 		global $bp;
 
 		$bppj_honeypot_name = apply_filters( 'bppj_honeypot_name', self::BPPJ_HONEYPOT_NAME );
 
-		if( isset( $_POST[$bppj_honeypot_name] ) && !empty( $_POST[$bppj_honeypot_name] ) )
-			$result['errors']->add( 'pjbp_honeypot', apply_filters( 'bppj_honeypot_fail_message', __( "You're totally a spammer. Go somewhere else with your spammy ways." ) ) );
-		
-		return $result;
+		if( isset( $_POST[$bppj_honeypot_name] ) && !empty( $_POST[$bppj_honeypot_name] ) ) 
+			$bp->signup->errors['pjbp_honeypot'] = __('Sorry, something went wrong with your registration','buddypress');
+
 	}
 
 }
