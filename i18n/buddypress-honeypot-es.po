@@ -12,4 +12,4 @@ msgstr ""
 
 #: /Applications/MAMP/htdocs/_wp.svn/wp-content/plugins/pj-buddypress-honeypot/pj-buddypress-honeypot.php:79
 msgid "You're totally a spammer. Go somewhere else with your spammy ways."
-msgstr "Usted es totalmente un spammer. Ve a otro lugar con sus formas de spam."
+msgstr "¡Hay un spammer en mi bota! Ve a otra parte con spammy-manías".
